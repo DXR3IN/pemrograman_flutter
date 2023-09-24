@@ -15,7 +15,9 @@ class WidgetDasar extends StatelessWidget {
           backgroundColor: Colors.orange,
         ),
         body: Center(
-          child: Text('Hallo World'),
+          child: Text(
+            'Hallo World',
+          ),
         ),
       ),
     );
