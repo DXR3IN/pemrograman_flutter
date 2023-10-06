@@ -17,41 +17,43 @@ class MyApp extends StatelessWidget {
             child: Text('Extract Widget'),
           ),
         ),
-        body: ListView(
-          children: [
-            ListChat(
-              imageUrl: "https://picsum.photos/200/300",
-              title: "Dika",
-              subtitle: "Makan",
-            ),
-            ListChat(),
-            ListChat(),
-            ListChat(),
-            ListChat(),
-            ListChat(),
-          ],
+        body: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return ChatList(
+              imageUrl: "https://picsum.photos/id/$index/200/300",
+              title: faker.person.name(),
+              subtitle: faker.lorem.sentence(),
+            );
+          },
         ),
       ),
     );
   }
 }
 
-class ListChat extends StatelessWidget {
+class ChatList extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String subtitle;
 
-  ListChat({this.imageUrl, this.title, this.subtitle});
+  ChatList(
+      {super.key,
+      required this.imageUrl,
+      required this.title,
+      required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(imageUrl),
-      ),
+      leading: CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
       contentPadding: EdgeInsets.all(10),
       trailing: Text("10:00 WIB"),
-      subtitle: Text(subtitle),
+      subtitle: Text(
+        subtitle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       title: Text(title),
     );
   }
