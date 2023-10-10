@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: Text('10:00 WIB'),
+              trailing: Text(DateFormat.Hm().format(DateTime.now())),
               // tileColor: Colors.amber,
               dense: true,
             ),

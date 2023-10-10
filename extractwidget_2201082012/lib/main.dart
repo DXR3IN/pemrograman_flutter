@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +49,7 @@ class ChatList extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
       contentPadding: EdgeInsets.all(10),
-      trailing: Text("10:00 WIB"),
+      trailing: Text(DateFormat.Hm().format(DateTime.now())),
       subtitle: Text(
         subtitle,
         maxLines: 1,
