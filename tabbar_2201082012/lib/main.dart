@@ -29,6 +29,7 @@ class MyTabBar extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
+        initialIndex: 3,
         length: myTab.length,
         child: Scaffold(
           appBar: AppBar(
@@ -36,6 +37,7 @@ class MyTabBar extends StatelessWidget {
             centerTitle: true,
             bottom: TabBar(
               labelColor: Colors.purple,
+              labelStyle: TextStyle(fontWeight: FontWeight.bold),
               indicatorColor: Colors.purple,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorWeight: 5,
@@ -43,8 +45,25 @@ class MyTabBar extends StatelessWidget {
                 color: Colors.black,
                 border: Border.all(color: Colors.purple),
               ),
+              unselectedLabelColor: Colors.white,
               tabs: myTab,
             ),
+          ),
+          body: TabBarView(
+            children: [
+              Center(
+                child: Text("Work"),
+              ),
+              Center(
+                child: Text("Call"),
+              ),
+              Center(
+                child: Text("Person"),
+              ),
+              Center(
+                child: Text("Consume"),
+              ),
+            ],
           ),
         ),
       ),
