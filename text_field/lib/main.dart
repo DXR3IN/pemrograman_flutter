@@ -16,36 +16,42 @@ class MyTextField extends StatelessWidget {
           title: Text("TextField"),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              TextField(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: TextField(
                 autocorrect: true,
-                decoration: InputDecoration(hintText: "NO BP"),
-                autofocus: true,
+
+                decoration: InputDecoration(
+                    icon: Icon(Icons.numbers_sharp),
+                    labelText: "NO BP: ",
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.deepOrangeAccent,
+                      ),
+                    ),
+                    suffixIcon: IconButton(
+                        onPressed: () {}, icon: Icon(Icons.remove_red_eye))),
+
+                // autofocus: false,
                 enableInteractiveSelection: true,
                 // obscureText: true,
+                showCursor: true,
+                cursorOpacityAnimates: true,
+                cursorColor: Colors.red,
+                // cursorWidth: 5,
+                // cursorHeight: 30,
+                textAlign: TextAlign.start,
+                textAlignVertical: TextAlignVertical.center,
+                textCapitalization: TextCapitalization.characters,
+
+                style: TextStyle(
+                  color: Colors.indigo,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
               ),
-              TextField(
-                autocorrect: true,
-                decoration: InputDecoration(hintText: "Nama"),
-              ),
-              TextField(
-                autocorrect: true,
-                decoration: InputDecoration(hintText: "MTK"),
-                keyboardType: TextInputType.number,
-              ),
-              TextField(
-                autocorrect: true,
-                decoration: InputDecoration(hintText: "B. Ing"),
-              ),
-              TextField(
-                autocorrect: true,
-                decoration: InputDecoration(hintText: "Java"),
-              ),
-            ],
-          ),
-        ),
+            )),
       ),
     );
   }
