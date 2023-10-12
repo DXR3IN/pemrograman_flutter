@@ -1,3 +1,4 @@
+import 'package:calculatortest/second_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,18 +22,24 @@ class _MyCalculatorAppState extends State<MyCalculatorApp> {
             child: Text("Calculator"),
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: 500,
-              height: 100,
-              color: Colors.blueAccent,
-            ),
-            Row(
-              children: [ElevatedButton(onPressed: () {}, child: Icon(Icons))],
-            )
-          ],
+        body: Center(
+          child: Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MyWidget();
+                      },
+                    ),
+                  );
+                },
+                child: Text("Oke"),
+              );
+            },
+          ),
         ),
       ),
     );
