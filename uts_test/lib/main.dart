@@ -28,7 +28,7 @@ class _MyUtsTestState extends State<MyUtsTest> {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("TextField"),
+          title: Text("UTS Latihan"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
