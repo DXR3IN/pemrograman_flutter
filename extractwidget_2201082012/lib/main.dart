@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.green,
           title: Center(
             child: Text('Extract Widget'),
           ),
@@ -56,6 +58,7 @@ class ChatList extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       title: Text(title),
+      autofocus: true,
     );
   }
 }
