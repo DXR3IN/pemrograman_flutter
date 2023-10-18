@@ -36,11 +36,11 @@ class MyPage extends StatelessWidget {
               padding: EdgeInsetsDirectional.only(end: 10),
             ),
             direction: DismissDirection.endToStart,
-            // onDismissed: (direction) {
-            //   if (direction == DismissDirection.endToStart) {
-            //     print(direction);
-            //   }
-            // },
+            onDismissed: (direction) {
+              if (direction == DismissDirection.endToStart) {
+                print(direction);
+              }
+            },
             confirmDismiss: (direction) {
               return showDialog(
                 context: context,
