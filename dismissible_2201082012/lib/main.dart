@@ -26,7 +26,9 @@ class MyPage extends StatelessWidget {
         itemCount: 20,
         itemBuilder: (context, index) {
           return Dismissible(
-            key: Key(index.toString()),
+            key: Key(
+              index.toString(),
+            ),
             background: Container(
               color: Colors.redAccent,
               child: Icon(Icons.delete),
@@ -34,8 +36,35 @@ class MyPage extends StatelessWidget {
               padding: EdgeInsetsDirectional.only(end: 10),
             ),
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              showDialog(context: context, builder: (context) {return;},)
+            // onDismissed: (direction) {
+            //   if (direction == DismissDirection.endToStart) {
+            //     print(direction);
+            //   }
+            // },
+            confirmDismiss: (direction) {
+              return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Hapus?"),
+                    content: Text("Anda yakin ingin menghapus ini?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: Text("Iya"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: Text("Tidak"),
+                      )
+                    ],
+                  );
+                },
+              );
             },
             child: ListTile(
               leading: CircleAvatar(
@@ -44,8 +73,12 @@ class MyPage extends StatelessWidget {
                 ),
               ),
               title: Text(faker.person.name()),
-              subtitle: Text(faker.lorem.sentence()),
-              tileColor: Colors.blueGrey,
+              subtitle: Text(
+                faker.lorem.sentence(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              style: ListTileStyle.list,
             ),
           );
         },
