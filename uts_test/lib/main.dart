@@ -9,7 +9,7 @@ var nama = "";
 var MTK = 0;
 var Bing = 0;
 var Java = 0;
-var rata = 0.0; // Declare the `rata` variable outside of the `build()` method.
+var rata = 0.0;
 
 class MyUtsTest extends StatefulWidget {
   @override
@@ -38,11 +38,12 @@ class _MyUtsTestState extends State<MyUtsTest> {
               TextField(
                 autocorrect: true,
                 decoration: InputDecoration(
+                  labelText: "No BP",
                   hintText: "No Bp",
                   border: OutlineInputBorder(),
                 ),
-                autofocus: true,
-                onSubmitted: (value) {
+                // autofocus: true,
+                onChanged: (value) {
                   setState(() {
                     nobp = value;
                     // Calculate the `rata` variable.
@@ -55,11 +56,12 @@ class _MyUtsTestState extends State<MyUtsTest> {
               TextField(
                 autocorrect: true,
                 decoration: InputDecoration(
+                  labelText: "Nama",
                   hintText: "Nama",
                   border: OutlineInputBorder(),
                 ),
-                autofocus: true,
-                onSubmitted: (value) {
+                // autofocus: true,
+                onChanged: (value) {
                   setState(() {
                     nama = value;
                     // Calculate the `rata` variable.
@@ -72,11 +74,12 @@ class _MyUtsTestState extends State<MyUtsTest> {
               TextField(
                 autocorrect: true,
                 decoration: InputDecoration(
+                  labelText: "MTK",
                   hintText: "MTK",
                   border: OutlineInputBorder(),
                 ),
-                autofocus: true,
-                onSubmitted: (value) {
+                // autofocus: true,
+                onChanged: (value) {
                   setState(() {
                     MTK = int.parse(value);
                     // Calculate the `rata` variable.
@@ -89,11 +92,12 @@ class _MyUtsTestState extends State<MyUtsTest> {
               TextField(
                 autocorrect: true,
                 decoration: InputDecoration(
-                  hintText: "B.Ing",
+                  labelText: "B. Ing",
+                  hintText: "B. Ing",
                   border: OutlineInputBorder(),
                 ),
-                autofocus: true,
-                onSubmitted: (value) {
+                // autofocus: true,
+                onChanged: (value) {
                   setState(() {
                     Bing = int.parse(value);
                     // Calculate the `rata` variable.
@@ -106,11 +110,12 @@ class _MyUtsTestState extends State<MyUtsTest> {
               TextField(
                 autocorrect: true,
                 decoration: InputDecoration(
-                  hintText: "B.Ing",
+                  labelText: "Java",
+                  hintText: "Java",
                   border: OutlineInputBorder(),
                 ),
-                autofocus: true,
-                onSubmitted: (value) {
+                // autofocus: true,
+                onChanged: (value) {
                   setState(
                     () {
                       Java = int.parse(value);
@@ -152,6 +157,7 @@ class _MyUtsTestState extends State<MyUtsTest> {
                         MTK = 0;
                         Bing = 0;
                         Java = 0;
+                        rata = 0.0;
                       });
                     },
                     child: Text("Reset"),
@@ -183,14 +189,32 @@ class MyHasil extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Hasil"),
+              SizedBox(
+                height: 20,
+              ),
               Text("No BP: $nobp"),
+              SizedBox(
+                height: 20,
+              ),
               Text("Nama: $nama"),
+              SizedBox(
+                height: 20,
+              ),
               Text("MTK: $MTK"),
+              SizedBox(
+                height: 20,
+              ),
               Text("B. Inggris: $Bing"),
+              SizedBox(
+                height: 20,
+              ),
               Text("Java: $Java"),
+              SizedBox(
+                height: 20,
+              ),
               Text("Rata: $rata"),
             ],
           ),
