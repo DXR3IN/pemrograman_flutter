@@ -10,7 +10,7 @@ class Products with ChangeNotifier {
         id: "id_${index + 1}",
         title: "Product ${index + 1}",
         description: 'Ini adalah deskripsi produk ${index + 1}',
-        price: 10 + Random().nextInt(100).toDouble(),
+        price: 100000 + Random().nextInt(100000).toDouble(),
         imageUrl: 'https://picsum.photos/id/$index/200/300',
       );
     },
@@ -18,6 +18,10 @@ class Products with ChangeNotifier {
 
   List<Product> get allProducts {
     return [..._allproducts];
+  }
+
+  Product findbyId(productId) {
+    return _allproducts.firstWhere((prod_id) => prod_id.id == productId);
   }
 
   // void addProducts() {
