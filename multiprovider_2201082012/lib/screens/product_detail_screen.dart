@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/cart_screen.dart';
+import '../widgets/badge.dart';
+import '../providers/cart.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/all_products.dart';
@@ -11,10 +14,27 @@ class ProductDetailScreen extends StatelessWidget {
     final productId =
         ModalRoute.of(context)!.settings.arguments as String; // is the id!
     final product = Provider.of<Products>(context).findById(productId);
-
+    final cart = Provider.of<Cart>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Details'),
+        actions: [
+          Consumer<Cart>(
+            builder: (context, value, ch) {
+              return Badges(
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        CartScreen.routeName,
+                      );
+                    },
+                    icon: Icon(Icons.shopping_cart)),
+                value: value.jumlahCart.toString(),
+                color: Colors.white,
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -50,7 +70,14 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           SizedBox(height: 20),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Product already add to Cart"),
+                ),
+              );
+              cart.addCart(product.id, product.title, product.price.toInt());
+            },
             child: Text(
               "add to Cart",
               style: TextStyle(

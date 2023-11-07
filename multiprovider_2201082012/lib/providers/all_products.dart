@@ -5,7 +5,7 @@ import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _allproducts = List.generate(
-    25,
+    16,
     (index) {
       return Product(
         id: "id_${index + 1}",

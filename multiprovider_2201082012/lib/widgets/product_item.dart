@@ -49,7 +49,11 @@ class ProductItem extends StatelessWidget {
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Product already add to Cart")));
+                SnackBar(
+                  content: Text("Product already add to Cart"),
+                  duration: Duration(milliseconds: 500),
+                ),
+              );
               producttoCart.addCart(
                   productData.id, productData.title, productData.price.toInt());
             },
