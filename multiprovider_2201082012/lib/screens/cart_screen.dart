@@ -20,7 +20,24 @@ class CartScreen extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text("Total : \$ ${cartItem.totalHarga}"),
             ),
-          )
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: cartItem.itemCart!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Text(
+                    "${cartItem.itemCart!.values.toList()[index].title}",
+                  ),
+                  subtitle: Text(
+                      "Quantity: ${cartItem.itemCart!.values.toList()[index].qty.toInt()}"),
+                  trailing: Text(
+                    "\$ ${cartItem.itemCart!.values.toList()[index].qty * cartItem.itemCart!.values.toList()[index].price}",
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
