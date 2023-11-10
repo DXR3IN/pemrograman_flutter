@@ -25,10 +25,11 @@ class Cart with ChangeNotifier {
       _itemCart.update(
         productId,
         (value) => cartItem(
-            id: value.id,
-            title: value.title,
-            price: value.price,
-            qty: value.qty! + 1),
+          id: value.id,
+          title: value.title,
+          price: value.price,
+          qty: value.qty + 1,
+        ),
       );
     } else {
       _itemCart.putIfAbsent(
