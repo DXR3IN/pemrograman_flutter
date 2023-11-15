@@ -71,7 +71,7 @@ class Counter with ChangeNotifier {
 
   void plusCounter() {
     _counter += 1;
-    if (_counter == 5) {
+    if (_counter > 5) {
       _counter += 5;
     }
     notifyListeners();
