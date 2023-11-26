@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_26102023/uts.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController nipController = TextEditingController();
   TextEditingController namaController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
+
   String tanggal = ""; // Variabel tanggal
 
   // Fungsi untuk menampilkan date picker
