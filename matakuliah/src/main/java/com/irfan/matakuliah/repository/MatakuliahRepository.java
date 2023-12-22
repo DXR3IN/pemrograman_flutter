@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author mhdir
  */
 public interface MatakuliahRepository extends JpaRepository<Matakuliah, Long>{
-    public Optional<Matakuliah> findMatakuliahByKode(Long kode);
+    public Optional<Matakuliah> findMatakuliahByKode(String kode);
 }

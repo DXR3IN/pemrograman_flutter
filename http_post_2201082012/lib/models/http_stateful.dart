@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as HTTP;
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HttpStateful {
@@ -14,7 +14,7 @@ class HttpStateful {
   static Future<HttpStateful> connectAPI(String name, String job) async {
     Uri URL = Uri.parse("https://reqres.in/api/users");
 
-    var hasilResponse = await HTTP.post(
+    var hasilResponse = await http.post(
       URL,
       body: {
         "name": name,

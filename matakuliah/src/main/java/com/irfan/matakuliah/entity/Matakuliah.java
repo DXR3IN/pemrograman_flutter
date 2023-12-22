@@ -19,25 +19,27 @@ import jakarta.persistence.Table;
 public class Matakuliah {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long kode;
+    private Long id;
+    private String kode;
     private String nama;
     private Long sks;
 
     public Matakuliah() {
     }
 
-    public Matakuliah(Long kode, String nama, Long sks) {
+    public Matakuliah(Long id, String kode, String nama, Long sks) {
+        this.id = id;
         this.kode = kode;
         this.nama = nama;
         this.sks = sks;
     }
 
-    public Long getKode() {
-        return kode;
+    public Long getId() {
+        return id;
     }
 
-    public void setKode(Long kode) {
-        this.kode = kode;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNama() {
@@ -63,6 +65,14 @@ public class Matakuliah {
     @Override
     public String toString() {
         return "matakuliah{" + "kode=" + kode + ", nama=" + nama + ", sks=" + sks + '}';
+    }
+
+    public String getKode() {
+        return kode;
+    }
+
+    public void setKode(String kode) {
+        this.kode = kode;
     }
     
     
