@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_crud/Mahasiswa.dart';
 import 'package:flutter_application_crud/api.dart';
+import 'edit.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _tgllahirController = TextEditingController();
 
+  int idMahasiswa = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  Text("Id data : $idMahasiswa"),
                   TextFormField(
                     controller: _namaController,
                     decoration: InputDecoration(labelText: 'Nama'),
@@ -80,7 +84,46 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {});
+                          // Clear text fields
+                          _namaController.clear();
+                          _emailController.clear();
+                          _tgllahirController.clear();
+                          setState(() {
+                            idMahasiswa = 0;
+                          });
+                        },
+                        child: Text('Clear Post'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          Mahasiswa editPost = Mahasiswa(
+                            id: idMahasiswa,
+                            nama: _namaController.text,
+                            email: _emailController.text,
+                            tgllahir: _tgllahirController.text,
+                          );
+
+                          print(_namaController.text);
+
+                          // Cetak log untuk memeriksa apakah data yang diperbarui benar-benar dikirim ke server
+                          // print("Updating post: ${editPost.id}");
+
+                          // Cetak log untuk memeriksa apakah pembaruan berhasil
+                          print("Post updated successfully");
+
+                          setState(() {
+                            idMahasiswa = 0;
+                          });
+
+                          _namaController.clear();
+                          _emailController.clear();
+                          _tgllahirController.clear();
+
+                          Mahasiswa editedPost =
+                              await _apiService.updateMahasiswa(editPost);
+
+                          // Fetch updated data from the server
+                          await _apiService.getMahasiswa();
                         },
                         child: Text('Edit Post'),
                       ),
@@ -125,12 +168,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .getMahasiswaById(posts[index].id);
 
                             // Set the controller values with the selected Mahasiswa's data
+                            idMahasiswa = selectedMahasiswa.id;
                             _namaController.text = selectedMahasiswa.nama;
                             _emailController.text = selectedMahasiswa.email;
                             _tgllahirController.text =
                                 selectedMahasiswa.tgllahir;
 
-                            setState(() {});
+                            _apiService.getMahasiswa();
+
+                            setState(() {
+                              idMahasiswa = selectedMahasiswa.id;
+                              print(idMahasiswa);
+                            });
+
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Update(
+                            //           selectedMahasiswa.id,
+                            //           selectedMahasiswa.nama,
+                            //           selectedMahasiswa.email,
+                            //           selectedMahasiswa.tgllahir),
+                            //     ));
                           },
                         );
                       },

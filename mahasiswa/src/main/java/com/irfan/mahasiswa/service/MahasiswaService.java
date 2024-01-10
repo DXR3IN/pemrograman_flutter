@@ -15,53 +15,83 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author mhdir
+ * @author Dell
  */
 @Service
 public class MahasiswaService {
     
-    private MahasiswaRepository mahasiswaRepository;
+   
+    private final MahasiswaRepository mahasiswaRepository;
     
-    @Autowired
-    public MahasiswaService(MahasiswaRepository mahasiswaRepository) {
-        this.mahasiswaRepository = mahasiswaRepository;
+     @Autowired
+     public MahasiswaService(MahasiswaRepository mahasiswaRepository) {
+         this.mahasiswaRepository = mahasiswaRepository;
+     }
+     
+     public List<Mahasiswa> getAll(){
+         return mahasiswaRepository.findAll();
+     }
+     
+     public Mahasiswa getMahasiswaById(Long Id){
+        return mahasiswaRepository.findById(Id).get();
     }
-    
-    public List<Mahasiswa> getAll(){
-        return mahasiswaRepository.findAll();
-    }
-    
-    public void insert(Mahasiswa mahasiswa){
-        Optional<Mahasiswa> mahasiswaOptional = mahasiswaRepository.findMahasiswaByEmail(mahasiswa.getEmail());
+     
+      public void insert(Mahasiswa mahasiswa){
+        Optional<Mahasiswa> mahasiswaOptional = 
+                mahasiswaRepository.findMahasiswaByEmail(mahasiswa.getEmail());
         if(mahasiswaOptional.isPresent()){
             throw new IllegalStateException("Email sudah ada");
         }
         mahasiswaRepository.save(mahasiswa);
     }
-    
+     
     public void delete(Long mahasiswaId){
-        boolean find = mahasiswaRepository.existsById(mahasiswaId);
-        if(!find){
-            throw new IllegalStateException("Mahasiswa Ini tidak ada");
+        boolean ada = mahasiswaRepository.existsById(mahasiswaId);
+        if(!ada){
+            throw new IllegalStateException("Mahasiswa ini tidak ada");
         }
-        mahasiswaRepository.deleteById(mahasiswaId);
+        mahasiswaRepository.deleteById(mahasiswaId); 
     }
     
+    
+    
     @Transactional
-    public void update(Long mahasiswaId, String nama, String email){
-        Mahasiswa mahasiswa = mahasiswaRepository.findById(mahasiswaId).orElseThrow(()->new IllegalStateException("Mahassiswa Tidak ada"));
-        
-        if(nama!=null && nama.length()>0 && !Objects.equals(mahasiswa.getName(), nama)){
-            mahasiswa.setName(nama);
+    public void update(Long mahasiswaId, String nama, String email, String tgllahir) {
+        Mahasiswa mahasiswa = mahasiswaRepository.findById(mahasiswaId)
+                .orElseThrow(() -> new IllegalStateException("Mahasiswa tidak ada"));
+        if (nama != null && nama.length() > 0 && !Objects.equals(mahasiswa.getNama(), nama)) {
+            mahasiswa.setNama(nama);
         }
-        if(email != null && email.length()>0 && !Objects.equals(mahasiswa.getEmail(), email)){
-            Optional<Mahasiswa> mahasiswaOptional= mahasiswaRepository.findMahasiswaByEmail(email);
-            if(mahasiswaOptional.isPresent()){
+
+        if (email != null && email.length() > 0 && !Objects.equals(mahasiswa.getEmail(), email)) {
+            Optional<Mahasiswa> mahasiswaOptional = mahasiswaRepository.findMahasiswaByEmail(email);
+            if (mahasiswaOptional.isPresent()) {
                 throw new IllegalStateException("Email sudah ada");
             }
             mahasiswa.setEmail(email);
         }
+
+        // Simpan pembaruan Mahasiswa setelah pembaruan propertinya
+        mahasiswaRepository.save(mahasiswa);
     }
-    
-    
+
+    @Transactional
+    public void update(Long mahasiswaId, String nama, String email) {
+        Optional<Mahasiswa> mahasiswaOptional = mahasiswaRepository.findById(mahasiswaId);
+
+        mahasiswaOptional.ifPresent(mahasiswa -> {
+            // Update properties if the Mahasiswa is present
+            if (nama != null && nama.length() > 0) {
+                mahasiswa.setNama(nama);
+            }
+
+            if (email != null && email.length() > 0) {
+                mahasiswa.setEmail(email);
+            }
+
+            // Simpan Mahasiswa setelah pembaruan propertinya
+            mahasiswaRepository.save(mahasiswa);
+        });
+    }
+
 }

@@ -11,30 +11,34 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
-
 /**
  *
- * @author mhdir
+ * @author Dell
  */
 @Entity
 @Table
 public class Mahasiswa {
     @Id
-    @GeneratedValue(strategy = GenerationType. IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String nama;
     private String email;
-    private LocalDate tglLahir;
-    
-    public Mahasiswa(){
-        
+    private LocalDate tgllahir;
+
+    public Mahasiswa() {
     }
 
-    public Mahasiswa(Long id, String name, String email, LocalDate tglLahir) {
+    public Mahasiswa(Long id, String nama, String email, LocalDate tgllahir) {
         this.id = id;
-        this.name = name;
+        this.nama = nama;
         this.email = email;
-        this.tglLahir = tglLahir;
+        this.tgllahir = tgllahir;
+    }
+    
+    public Mahasiswa( String nama, String email, LocalDate tgllahir) {
+        this.nama = nama;
+        this.email = email;
+        this.tgllahir = tgllahir;
     }
 
     public Long getId() {
@@ -45,12 +49,12 @@ public class Mahasiswa {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNama() {
+        return nama;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getEmail() {
@@ -61,17 +65,17 @@ public class Mahasiswa {
         this.email = email;
     }
 
-    public LocalDate getTglLahir() {
-        return tglLahir;
+    public LocalDate getTgllahir() {
+        return tgllahir;
     }
 
-    public void setTglLahir(LocalDate tglLahir) {
-        this.tglLahir = tglLahir;
+    public void setTgllahir(LocalDate tgllahir) {
+        this.tgllahir = tgllahir;
     }
 
     @Override
     public String toString() {
-        return "Mahasiswa{" + "id=" + id + ", name=" + name + ", email=" + email + ", tglLahir=" + tglLahir + '}';
+        return "Mahasiswa{" + "id=" + id + ", nama=" + nama + ", email=" + email + ", tgllahir=" + tgllahir + '}';
     }
     
     
